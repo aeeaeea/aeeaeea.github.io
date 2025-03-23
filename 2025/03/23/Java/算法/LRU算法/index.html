@@ -19,24 +19,21 @@
   <meta name="author" content="aeea">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一篇测试文章">
+    <meta name="description" content="LRU算法 是什么   LRU（Least Recently Used）算法是一种用于缓存管理的算法，它的核心思想是基于“局部性原理”（Locality of Reference），即认为最近被访问过的数据很可能会在不久的将来再次被访问。LRU 算法通过维护一个最近访问的记录，淘汰最长时间未被访问的数据，以提高缓存的命中率。  简单来说即为最近最少使用原则    实现   思路  使用hash+双">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试文章">
-<meta property="og:url" content="http://example.com/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:title" content="aeea&#39;s blog">
+<meta property="og:url" content="http://example.com/2025/03/23/Java/%E7%AE%97%E6%B3%95/LRU%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="aeea&#39;s blog">
-<meta property="og:description" content="这是一篇测试文章">
+<meta property="og:description" content="LRU算法 是什么   LRU（Least Recently Used）算法是一种用于缓存管理的算法，它的核心思想是基于“局部性原理”（Locality of Reference），即认为最近被访问过的数据很可能会在不久的将来再次被访问。LRU 算法通过维护一个最近访问的记录，淘汰最长时间未被访问的数据，以提高缓存的命中率。  简单来说即为最近最少使用原则    实现   思路  使用hash+双">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png?v=2025022701">
-<meta property="article:published_time" content="2025-02-26T14:36:51.000Z">
-<meta property="article:modified_time" content="2025-02-26T16:39:50.165Z">
+<meta property="article:published_time" content="2025-03-23T15:22:24.171Z">
+<meta property="article:modified_time" content="2025-03-23T15:22:24.172Z">
 <meta property="article:author" content="aeea">
-<meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png?v=2025022701">
   
   
   
-  <title>测试文章 - aeea&#39;s blog</title>
+  <title>aeea&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="测试文章"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -213,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-26 22:36" pubdate>
-          2025年2月26日 晚上
+        <time datetime="2025-03-23 23:22" pubdate>
+          2025年3月23日 晚上
         </time>
       </span>
     
@@ -225,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          392 字
         
       </span>
     
@@ -236,7 +233,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -273,13 +270,149 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">测试文章</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一篇测试文章</p>
-<p><img src="/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png?v=2025022701" srcset="/img/loading.gif" lazyload alt="图片引用方法二"></p>
+                <h2 id="LRU算法"><a href="#LRU算法" class="headerlink" title="LRU算法"></a>LRU算法</h2><ol>
+<li>是什么</li>
+</ol>
+<ul>
+<li><p>LRU（Least Recently Used）算法是一种用于缓存管理的算法，它的核心思想是基于“局部性原理”（Locality of Reference），即认为最近被访问过的数据很可能会在不久的将来再次被访问。LRU 算法通过维护一个最近访问的记录，淘汰最长时间未被访问的数据，以提高缓存的命中率。</p>
+</li>
+<li><p>简单来说即为最近最少使用原则</p>
+</li>
+</ul>
+<ol start="2">
+<li>实现</li>
+</ol>
+<ul>
+<li><p>思路</p>
+<ul>
+<li>使用hash+双向链表</li>
+<li>哈希可以实现快速访问指定元素，双向链表可以实现快速删除</li>
+</ul>
+</li>
+<li><p>实现</p>
+<ul>
+<li><pre><code class="language-java">//节点结构
+class Node&#123;
+    int key;
+    int val;
+    Node pre;
+    Node next;
+    public Node(int key,int val)&#123;
+        this.key=key;
+        this.val=val;
+    &#125;
+&#125;
+
+//链表构造
+class DoubleList&#123;
+    Node head;
+    Node tail;
+    int size;
+
+    public DoubleList()&#123;
+        head=new Node(0,0);
+        tail=new Node(0,0);
+        head.next=tail;
+        tail.pre=head;
+        size=0;
+    &#125;
+
+    public void addLast(Node x)&#123;
+        x.pre=tail.pre;
+        tail.pre.next=x;
+        x.next=tail;
+        tail.pre=x;
+        size++;
+    &#125;
+    //node x一定存在
+    public void remove(Node x)&#123;
+        x.next.pre=x.pre;
+        x.pre.next=x.next;
+        size--;
+    &#125;
+
+    public First removeFirst()&#123;
+        if(head.next==tail)&#123;
+            return null;
+        &#125;
+        Node first=head.next;
+        remove(first);
+        return first;
+    &#125;
+
+    public int size()&#123;
+        return size;
+    &#125;
+&#125;
+
+//LRU缓存cache构造
+class LRUCache&#123;
+    private HashMap&lt;Integer,Node&gt; map;
+    private DoubleList cache;
+    private int cap;
+
+    public LRUCache(int capacity)&#123;
+        this.cap=capacity;
+        map=new HashMap&lt;&gt;();
+        cache=new DoubleList();
+    &#125;
+
+    public void makeRecently(int key)&#123;
+        Node x=map.get(key);
+        cache.remove(key);
+        cache.addLast(key);
+    &#125;
+
+    public void addRecently(int key,int val)&#123;
+        Node x=new Node(key,val)
+        cache.addLast(x);
+        map.put(key,x);
+    &#125;
+
+    public void deleteKey(int key)&#123;
+        Node x=map.get(key);
+        cache.remove(x);
+        map.remove(key);
+    &#125;
+
+    public void removeLeastRecently()&#123;
+        Node x=cache.removeFirst();
+        map.remove(x.key);
+    &#125;
+
+    public int get(int key)&#123;
+        if(!map.containsKey(key))&#123;
+            return -1;
+        &#125;
+        Node x=map.get(key);
+        makeRecently(x);
+        return x.val;
+    &#125;
+
+    public void put(int key,int val)&#123;
+        if(map.containsKey(key))&#123;
+            deleteKey(key);
+            addRecently(key,val);
+            return;
+        &#125;
+
+        if(cap==cache.size())&#123;
+            removeLeastRecently();
+        &#125;
+
+        addRecently(key,val);
+    &#125;
+&#125;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
 
                 
               </div>
@@ -288,34 +421,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
-      
-    </div>
   
 </div>
 
@@ -325,8 +430,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>测试文章</div>
-      <div>http://example.com/2025/02/26/测试文章/</div>
+      <div></div>
+      <div>http://example.com/2025/03/23/Java/算法/LRU算法/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +443,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年2月26日</div>
+          <div>2025年3月23日</div>
         </div>
       
       
@@ -370,7 +475,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/23/%E6%AC%A2%E8%BF%8E%EF%BC%81/5.%20Joplin%20Privacy%20Policy/" title="">
+                      <a href="/2025/03/23/Java/%E7%AE%97%E6%B3%95/%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E5%99%A8/" title="">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
@@ -380,8 +485,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/26/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2025/03/23/Java/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

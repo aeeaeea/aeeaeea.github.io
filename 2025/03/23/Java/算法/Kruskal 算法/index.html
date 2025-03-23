@@ -19,24 +19,21 @@
   <meta name="author" content="aeea">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一篇测试文章">
+    <meta name="description" content="Kruskal 算法 最小生成树定义   那么什么是图的「⽣成树」呢，其实按字⾯意思也好理解，就是在图中找⼀棵包含图中的所有节点的树。专业点说，⽣成树是含有图中所有顶点的「⽆环连通⼦图」。  那么最⼩⽣成树很好理解了，所有可能的⽣成树中，权重和最⼩的那棵⽣成树就叫「最⼩⽣成树」。    代码实现   简单来说即为并查集加排序  class UF&#123;     private int coun">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试文章">
-<meta property="og:url" content="http://example.com/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:title" content="aeea&#39;s blog">
+<meta property="og:url" content="http://example.com/2025/03/23/Java/%E7%AE%97%E6%B3%95/Kruskal%20%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="aeea&#39;s blog">
-<meta property="og:description" content="这是一篇测试文章">
+<meta property="og:description" content="Kruskal 算法 最小生成树定义   那么什么是图的「⽣成树」呢，其实按字⾯意思也好理解，就是在图中找⼀棵包含图中的所有节点的树。专业点说，⽣成树是含有图中所有顶点的「⽆环连通⼦图」。  那么最⼩⽣成树很好理解了，所有可能的⽣成树中，权重和最⼩的那棵⽣成树就叫「最⼩⽣成树」。    代码实现   简单来说即为并查集加排序  class UF&#123;     private int coun">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png?v=2025022701">
-<meta property="article:published_time" content="2025-02-26T14:36:51.000Z">
-<meta property="article:modified_time" content="2025-02-26T16:39:50.165Z">
+<meta property="article:published_time" content="2025-03-23T15:22:24.181Z">
+<meta property="article:modified_time" content="2025-03-23T15:22:24.181Z">
 <meta property="article:author" content="aeea">
-<meta property="article:tag" content="原创">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png?v=2025022701">
   
   
   
-  <title>测试文章 - aeea&#39;s blog</title>
+  <title>aeea&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="测试文章"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -213,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-26 22:36" pubdate>
-          2025年2月26日 晚上
+        <time datetime="2025-03-23 23:22" pubdate>
+          2025年3月23日 晚上
         </time>
       </span>
     
@@ -225,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          245 字
         
       </span>
     
@@ -236,7 +233,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -273,13 +270,86 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">测试文章</h1>
+            <h1 id="seo-header"></h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一篇测试文章</p>
-<p><img src="/2025/02/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png?v=2025022701" srcset="/img/loading.gif" lazyload alt="图片引用方法二"></p>
+                <h2 id="Kruskal-算法"><a href="#Kruskal-算法" class="headerlink" title="Kruskal 算法"></a>Kruskal 算法</h2><ol>
+<li>最小生成树定义</li>
+</ol>
+<ul>
+<li><p>那么什么是图的「⽣成树」呢，其实按字⾯意思也好理解，就是在图中找⼀棵包含图中的所有节点的树。专业点说，⽣成树是含有图中所有顶点的「⽆环连通⼦图」。</p>
+</li>
+<li><p>那么最⼩⽣成树很好理解了，所有可能的⽣成树中，权重和最⼩的那棵⽣成树就叫「最⼩⽣成树」。</p>
+</li>
+</ul>
+<ol start="2">
+<li>代码实现</li>
+</ol>
+<ul>
+<li><p>简单来说即为并查集加排序</p>
+</li>
+<li><pre><code class="language-java">class UF&#123;
+    private int count;
+    private int[] parent;
+
+    public UF(int n)&#123;
+        parent=new int[n];
+        this.count=n;
+    &#125;
+
+    public void union(int p,int q)&#123;
+        int rootp=find(p);
+        int rootq=find(q);
+        if(rootp==rootq)&#123;
+            return;
+        &#125;
+        parent[rootp]=rootq;
+        count--;
+    &#125;
+
+    public boolean connected(int p,int q)&#123;
+        int rootp=find(p);
+        int rootq=find(q);
+        return rootp==rootq;
+    &#125;
+
+    public int find(int x)&#123;
+        while(parent[x]!=x)&#123;
+            parent[x]=parent[parent[x]];
+            x=parent[x];
+        &#125;
+        return x;
+    &#125;
+
+    public int count()&#123;
+        return count;
+    &#125;
+&#125;
+
+int minimumCost(int n,int[][] connections)&#123;
+    UF uf=new UF(n+1);
+    Arrays.sort(connections,(a,b)-&gt;(a[2]-b[2]));
+
+    int sum=0;
+
+    for(int[] edge:connections)&#123;
+        int u=edge[0];
+        int v=edge[1];
+        int weight=edge[2];
+        if(uf.connected(u,v))&#123;
+            continue;
+        &#125;
+        sum+=weight;
+        uf.union(u,v);
+    &#125;
+
+    return uf.count()==2?sum:-1;
+&#125;
+</code></pre>
+</li>
+</ul>
 
                 
               </div>
@@ -288,34 +358,6 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Java/" class="category-chain-item">Java</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/%E5%8E%9F%E5%88%9B/" class="print-no-link">#原创</a>
-      
-    </div>
   
 </div>
 
@@ -325,8 +367,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>测试文章</div>
-      <div>http://example.com/2025/02/26/测试文章/</div>
+      <div></div>
+      <div>http://example.com/2025/03/23/Java/算法/Kruskal 算法/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +380,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年2月26日</div>
+          <div>2025年3月23日</div>
         </div>
       
       
@@ -370,7 +412,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/23/%E6%AC%A2%E8%BF%8E%EF%BC%81/5.%20Joplin%20Privacy%20Policy/" title="">
+                      <a href="/2025/03/23/Java/%E7%AE%97%E6%B3%95/Prim%E7%AE%97%E6%B3%95/" title="">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
@@ -380,8 +422,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/26/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2025/03/23/Java/%E7%AE%97%E6%B3%95/Union%20Find%20%E7%AE%97%E6%B3%95/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
